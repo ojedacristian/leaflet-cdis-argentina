@@ -1,3 +1,5 @@
+import { icons } from './icons.js'
+
 var parentGroup = L.markerClusterGroup();
 var CDI = L.featureGroup.subGroup(parentGroup);
 var CDR = L.featureGroup.subGroup(parentGroup);
@@ -30,45 +32,6 @@ const query = encodeURIComponent(
 url2 = url2 + "&tq=" + query;
 url3 = url3 + "&tq=" + query;
 
-// Icons
-var ColorIcons = L.Icon.extend({
-  options: {
-    shadowUrl:
-      "https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png",
-    iconSize: [25, 41],
-    iconAnchor: [12, 41],
-    popupAnchor: [1, -34],
-    shadowSize: [41, 41]
-  }
-});
-var urlIcons =
-  "https://cdn.rawgit.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-";
-var blueIcon = new ColorIcons({ iconUrl: urlIcons + "blue.png" }),
-  goldIcon = new ColorIcons({ iconUrl: urlIcons + "gold.png" }),
-  redIcon = new ColorIcons({ iconUrl: urlIcons + "red.png" }),
-  greenIcon = new ColorIcons({ iconUrl: urlIcons + "green.png" }),
-  orangeIcon = new ColorIcons({ iconUrl: urlIcons + "orange.png" }),
-  yellowIcon = new ColorIcons({ iconUrl: urlIcons + "yellow.png" }),
-  violetIcon = new ColorIcons({ iconUrl: urlIcons + "violet.png" }),
-  greyIcon = new ColorIcons({ iconUrl: urlIcons + "grey.png" }),
-  blackIcon = new ColorIcons({ iconUrl: urlIcons + "black.png" });
-
-L.icon = function (options) {
-  return new L.Icon(options);
-};
-
-const icons = {
-  CDIOK: redIcon,
-  CDI: redIcon,
-  CDIN: greyIcon,
-  CDR: blueIcon,
-  CIC: orangeIcon,
-  HUE: greenIcon,
-  IM: goldIcon,
-  MAY: greyIcon,
-  ANP: violetIcon,
-  MDC: yellowIcon
-};
 
 // Buscamos los datos Json de Google
 fetch(url3)
@@ -80,7 +43,7 @@ fetch(url3)
     var amount = entry.length;
     var i;
     for (i = 0; i < amount; i++) {
-      console.log("Latitud", entry[i].c[9]?.v || "null");
+      // console.log("Latitud", entry[i].c[9]?.v || "null");
       var lat = entry[i].c[9]?.v || "";
       var lon = entry[i].c[10]?.v || "";
       //var titulo = entry[i]["gsx$titulo"]["$t"];
