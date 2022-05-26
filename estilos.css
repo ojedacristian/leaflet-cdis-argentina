@@ -1,0 +1,40 @@
+html,
+body {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+#map {
+  width: 100%;
+  height: 100vh;
+}
+/*
+.leaflet-control-layers-list span {
+  font-family: "Roboto", sans-serif;
+  color: #333;
+}*/
+div.leaflet-control-container > div.leaflet-top.leaflet-right > div {
+  margin-top: 4px;
+}
+.leaflet-control-layers {
+  border-radius: 0;
+}
+.todosdiv {
+  padding: 4px 4px 4px 4px;
+  color: #333;
+  background: #ffffff;
+  width: 90%;
+  border: 2px solid rgba(200, 200, 200, 1);
+}
+
+.leaflet-touch .leaflet-control-layers,
+.leaflet-touch .leaflet-bar {
+  border: 2px solid rgba(200, 200, 200, 1);
+  background-clip: unset;
+}
+.b {
+  font-weight: bold;
+}
+.azul {
+  color: #1d396b;
+}
