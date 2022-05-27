@@ -1,40 +1,25 @@
-import { icons } from './icons.js'
+import { icons } from './components/icons.js'
 
-var parentGroup = L.markerClusterGroup();
-var CDI = L.featureGroup.subGroup(parentGroup);
-var CDR = L.featureGroup.subGroup(parentGroup);
-var CIC = L.featureGroup.subGroup(parentGroup);
-var HUE = L.featureGroup.subGroup(parentGroup);
-var IM = L.featureGroup.subGroup(parentGroup);
-var MAY = L.featureGroup.subGroup(parentGroup);
-var ANP = L.featureGroup.subGroup(parentGroup);
-var MDC = L.featureGroup.subGroup(parentGroup);
-var CDIN = L.featureGroup.subGroup(parentGroup);
+const parentGroup = L.markerClusterGroup();
+const CDI = L.featureGroup.subGroup(parentGroup);
+const CDR = L.featureGroup.subGroup(parentGroup);
+const CIC = L.featureGroup.subGroup(parentGroup);
+const HUE = L.featureGroup.subGroup(parentGroup);
+const IM = L.featureGroup.subGroup(parentGroup);
+const MAY = L.featureGroup.subGroup(parentGroup);
+const ANP = L.featureGroup.subGroup(parentGroup);
+const MDC = L.featureGroup.subGroup(parentGroup);
+const CDIN = L.featureGroup.subGroup(parentGroup);
 
-// Google Spreadsheet
-var spreadsheetID = "1gBBlBkU2nMio5MV_qadALPZSRR-SSLQ6zWPNRNTj5ms";
-var spreadsheetIDNuestra = "1YwWUH_qOs0ZS6lyOuMzIapvVNhZxe9sSXh66zkxIzTA";
-var url =
-  "https://spreadsheets.google.com/feeds/list/" +
-  spreadsheetIDNuestra +
-  "/1/public/values?alt=json";
-
-let url2 =
-  "https://docs.google.com/spreadsheets/d/1gBBlBkU2nMio5MV_qadALPZSRR-SSLQ6zWPNRNTj5ms/gviz/tq?";
-
-let url3 =
-  "https://docs.google.com/spreadsheets/d/1YwWUH_qOs0ZS6lyOuMzIapvVNhZxe9sSXh66zkxIzTA/gviz/tq?";
+const spreadsheetIDMDS = "1gBBlBkU2nMio5MV_qadALPZSRR-SSLQ6zWPNRNTj5ms";
+const spreadsheetIDSSPIN = "1YwWUH_qOs0ZS6lyOuMzIapvVNhZxe9sSXh66zkxIzTA";
 const query = encodeURIComponent(
-  //  "Select * where N = 'CIC' OR N= 'CDI' OR N= 'CDR' OR N='CDIN' "
-  " Select * where N = 'CDIN' "
+  " Select * where N = 'CDIN' "  //  "Select * where N = 'CIC' OR N= 'CDI' OR N= 'CDR' OR N='CDIN' "
 );
-
-url2 = url2 + "&tq=" + query;
-url3 = url3 + "&tq=" + query;
-
+const url = `https://docs.google.com/spreadsheets/d/${spreadsheetIDSSPIN}/gviz/tq? ${'&tq=' + query}`
 
 // Buscamos los datos Json de Google
-fetch(url3)
+fetch(url)
   .then((res) => res.text())
   .then((rep) => {
     const data = JSON.parse(rep.substr(47).slice(0, -2));
@@ -62,27 +47,16 @@ fetch(url3)
           ? ""
           : '<a target="_blank" href="' + web + '">Conocé más</a>';
       L.marker([lat, lon], { icon: icons[cat] })
-        .bindPopup(
-          "<p>" +
-            categoria +
-            "</p>" +
-            "<h4>" +
-            articulador +
-            "</h4>" +
-            "<p>" +
-            dir +
-            "</p>" +
-            "<p>" +
-            email +
-            "</p>" +
-            "<p>" +
-            tel +
-            "</p>" +
-            "<p>" +
-            expte +
-            "</p>" +
-            btnWeb +
-            '<p><a target="_blank" href="https://www.argentina.gob.ar/desarrollosocial/sumainformacion">Sumá información</a></p>'
+        .bindPopup(`
+        <p>${categoria}</p> 
+          <h4>${articulador}</h4> 
+          <p> ${dir}</p> 
+          <p> ${email}</p> 
+          <p> ${tel}</p> 
+          <p> ${expte}</p> 
+          ${btnWeb} 
+          <p><a target="_blank" href="https://www.argentina.gob.ar/desarrollosocial/sumainformacion">Sumá información</a></p>
+        `
         )
         .addTo(eval(cat));
     }
@@ -175,7 +149,7 @@ L.Control.mostrar = L.Control.extend({
     });
     return div1;
   },
-  onRemove: function (map) {}
+  onRemove: function (map) { }
 });
 L.control.mostrar = function (opts) {
   return new L.Control.mostrar(opts);
@@ -206,7 +180,7 @@ L.Control.ubicacion = L.Control.extend({
     });
     return button;
   },
-  onRemove: function (map) {}
+  onRemove: function (map) { }
 });
 L.control.ubicacion = function (opts) {
   return new L.Control.ubicacion(opts);
@@ -224,7 +198,7 @@ L.Control.ampliar = L.Control.extend({
     });
     return button;
   },
-  onRemove: function (map) {}
+  onRemove: function (map) { }
 });
 L.control.ampliar = function (opts) {
   return new L.Control.ampliar(opts);
