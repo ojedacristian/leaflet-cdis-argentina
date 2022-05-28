@@ -10,6 +10,7 @@ const MAY = L.featureGroup.subGroup(parentGroup);
 const ANP = L.featureGroup.subGroup(parentGroup);
 const MDC = L.featureGroup.subGroup(parentGroup);
 const CDIN = L.featureGroup.subGroup(parentGroup);
+const subGroups = [CDI,CDR,CIC,HUE,IM,MAY,ANP,MDC,CDIN,]
 
 const spreadsheetIDMDS = "1gBBlBkU2nMio5MV_qadALPZSRR-SSLQ6zWPNRNTj5ms";
 const spreadsheetIDSSPIN = "1YwWUH_qOs0ZS6lyOuMzIapvVNhZxe9sSXh66zkxIzTA";
@@ -83,15 +84,7 @@ var mapa = L.tileLayer("https://gis.argentina.gob.ar/osm/{z}/{x}/{y}.png", {
 
 var map = L.map("map", { layers: [mapa, CDI] }).setView([-40.44, -63.59], 4.5);
 parentGroup.addTo(map);
-CDI.addTo(map);
-CDIN.addTo(map);
-CDR.addTo(map);
-MDC.addTo(map);
-CIC.addTo(map);
-HUE.addTo(map);
-IM.addTo(map);
-MAY.addTo(map);
-ANP.addTo(map);
+subGroups.map( sub => sub.addTo(map))
 
 var baseMaps = {
   Mapa: mapa
@@ -102,12 +95,6 @@ const overlayMaps = {
   //"Centros de Referencia": CDR,
   //"Centros Integradores Comunitarios": CIC,
   "Centros Nuevos": CDIN
-
-  // "Consejo Federal de Mayores": MAY,
-  // "Instituciones de Microcrédito": IM,
-  // "Mercados Solidarios": MDC,
-  // "Organismos de Protección Integral": ANP,
-  // "Pro Huerta": HUE
 };
 
 L.Control.mostrar = L.Control.extend({
@@ -124,26 +111,10 @@ L.Control.mostrar = L.Control.extend({
     var visible = 1;
     L.DomEvent.on(input, "click", function () {
       if (visible) {
-        CDI.remove();
-        CDIN.remove();
-        CDR.remove();
-        CIC.remove();
-        HUE.remove();
-        IM.remove();
-        MAY.remove();
-        ANP.remove();
-        MDC.remove();
+        subGroups.map(sub => sub.remove() )
         visible = 0;
       } else {
-        CDI.addTo(map);
-        CDIN.addTo(map);
-        CDR.addTo(map);
-        CIC.addTo(map);
-        HUE.addTo(map);
-        IM.addTo(map);
-        MAY.addTo(map);
-        ANP.addTo(map);
-        MDC.addTo(map);
+        subGroups.map(sub => sub.addTo(map) )
         visible = 1;
       }
     });
