@@ -16,7 +16,8 @@ const subGroups = [CDI, CDR, CIC, HUE, IM, MAY, ANP, MDC, CDIN,]
 const spreadsheetIDMDS = "1gBBlBkU2nMio5MV_qadALPZSRR-SSLQ6zWPNRNTj5ms";
 const spreadsheetIDSSPIN = "1YwWUH_qOs0ZS6lyOuMzIapvVNhZxe9sSXh66zkxIzTA";
 const query = encodeURIComponent(
-  " Select * where N = 'CDIN' "  //  "Select * where N = 'CIC' OR N= 'CDI' OR N= 'CDR' OR N='CDIN' "
+  // " Select * where N = 'CDIN' "  
+   "Select * where N = 'CIC' OR N= 'CDI' OR N= 'CDR' OR N='CDIN' "
 );
 const url = `https://docs.google.com/spreadsheets/d/${spreadsheetIDSSPIN}/gviz/tq? ${'&tq=' + query}`
 
@@ -94,12 +95,11 @@ const baseMaps = {
 const overlayMaps = {
   //"Centros de Desarrollo Infantil": CDI,
   //"Centros de Referencia": CDR,
-  //"Centros Integradores Comunitarios": CIC,
+  "Centros Integradores Comunitarios": CIC,
   "Centros Nuevos": CDIN
 };
 
 loadControls(subGroups) // MostrarOcultar Todos - Ampliar - Ubicacion
-
 L.control.ubicacion({ position: "bottomright" }).addTo(map);
 L.control.ampliar({ position: "bottomright" }).addTo(map);
 L.control.mostrar({ position: "topright" }).addTo(map);
