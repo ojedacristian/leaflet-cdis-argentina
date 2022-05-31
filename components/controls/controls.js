@@ -1,5 +1,5 @@
 export const loadControls = (subGroups)=> {
-        
+
     L.Control.mostrar = L.Control.extend({
         onAdd: function (map) {
           let div1 = L.DomUtil.create("div", "todosdiv");
